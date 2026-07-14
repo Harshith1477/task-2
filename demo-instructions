@@ -1,0 +1,30 @@
+STEP 1 — 
+docker compose down
+
+STEP 2 — Start the whole stack
+docker compose up -d --build
+
+STEP 3 — Confirm both containers are up
+docker compose ps
+
+STEP 4 — Inserting first row
+Invoke-RestMethod -Uri http://localhost:3000/items -Method POST -ContentType "application/json" -Body '{"name":"Harshith"}'
+
+STEP 5 — Inserting second row
+Invoke-RestMethod -Uri http://localhost:3000/items -Method POST -ContentType "application/json" -Body '{"name":"Harshini"}'
+
+STEP 6 — Show the data through your API
+Invoke-RestMethod -Uri http://localhost:3000/items
+
+STEP 7 — Show the data directly inside Postgres
+docker exec -it task-2-db-1 psql -U app -d appdb -c "SELECT * FROM items;"
+
+STEP 8- (persistence test starts here)
+docker compose down
+
+STEP 9 -
+docker compose up -d
+
+STEP 10 -
+Invoke-RestMethod -Uri http://localhost:3000/items
+
